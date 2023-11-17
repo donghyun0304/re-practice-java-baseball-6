@@ -1,5 +1,6 @@
 package baseball.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,5 +23,7 @@ public class BaseballNumbers {
         }
     }
 
-
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
 }
