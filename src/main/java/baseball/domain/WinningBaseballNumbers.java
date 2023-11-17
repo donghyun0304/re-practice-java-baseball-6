@@ -28,11 +28,11 @@ public class WinningBaseballNumbers {
         for(int i=0; i< BASEBALL_LIST_MAX_NUMBER; i++){
             for(int j=0; j<BASEBALL_LIST_MAX_NUMBER; j++){
 
-                if(numbers.get(i) == tryNumbers.get(i)){
+                if(i==j && numbers.get(i) == tryNumbers.get(j)){
                     result.put(STRIKE, result.getOrDefault(STRIKE, 0) + 1);
                     break;
                 }
-                if(numbers.contains(tryNumbers.get(j)) && numbers.get(i) != tryNumbers.get(i)){
+                if(i!=j && numbers.get(i) == tryNumbers.get(j)){
                     result.put(BALL, result.getOrDefault(BALL, 0) + 1);
                     break;
                 }
