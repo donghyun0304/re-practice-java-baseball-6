@@ -22,25 +22,39 @@ public class WinningBaseballNumbers {
         }
     }
 
-    public BaseballResult calcResult(BaseballNumbers baseballNumbers){
+    public BaseballResult calcResult(BaseballNumbers baseballNumbers) {
         List<Integer> tryNumbers = baseballNumbers.getNumbers();
         Map<String, Integer> result = new HashMap<>();
-        for(int i=0; i< BASEBALL_LIST_MAX_NUMBER; i++){
-            for(int j=0; j<BASEBALL_LIST_MAX_NUMBER; j++){
 
-                if(i==j && numbers.get(i) == tryNumbers.get(j)){
-                    result.put(STRIKE, result.getOrDefault(STRIKE, 0) + 1);
-                    break;
-                }
-                if(i!=j && numbers.get(i) == tryNumbers.get(j)){
-                    result.put(BALL, result.getOrDefault(BALL, 0) + 1);
-                    break;
-                }
-            }
-        }
-        if(result.isEmpty()){
-            result.put(NOTHING, 1);
+        calculateStrikes(result, tryNumbers);
+        calculateBalls(result, tryNumbers);
+        if (result.isEmpty()) {
+            initializeEmptyResult(result);
         }
         return new BaseballResult(result);
+    }
+
+    private void calculateStrikes(Map<String, Integer> result, List<Integer> tryNumbers) {
+        for (int i = 0; i < BASEBALL_LIST_MAX_NUMBER; i++) {
+            if (numbers.get(i).equals(tryNumbers.get(i))) {
+                updateResult(result, STRIKE);
+            }
+        }
+    }
+
+    private void calculateBalls(Map<String, Integer> result, List<Integer> tryNumbers) {
+        for (int i = 0; i < BASEBALL_LIST_MAX_NUMBER; i++) {
+            if (tryNumbers.contains(numbers.get(i)) && !numbers.get(i).equals(tryNumbers.get(i))) {
+                updateResult(result, BALL);
+            }
+        }
+    }
+
+    private void updateResult(Map<String, Integer> result, String key) {
+        result.put(key, result.getOrDefault(key, 0) + 1);
+    }
+
+    private void initializeEmptyResult(Map<String, Integer> result) {
+        result.put(NOTHING, 1);
     }
 }
