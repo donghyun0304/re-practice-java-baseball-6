@@ -34,7 +34,7 @@ public class WinningBaseballNumbers {
         return new BaseballResult(result);
     }
 
-    private void calculateStrikes(Map<String, Integer> result, List<Integer> tryNumbers) {
+    public void calculateStrikes(Map<String, Integer> result, List<Integer> tryNumbers) {
         for (int i = 0; i < BASEBALL_LIST_MAX_NUMBER; i++) {
             if (numbers.get(i).equals(tryNumbers.get(i))) {
                 updateResult(result, STRIKE);
@@ -42,7 +42,7 @@ public class WinningBaseballNumbers {
         }
     }
 
-    private void calculateBalls(Map<String, Integer> result, List<Integer> tryNumbers) {
+    public void calculateBalls(Map<String, Integer> result, List<Integer> tryNumbers) {
         for (int i = 0; i < BASEBALL_LIST_MAX_NUMBER; i++) {
             if (tryNumbers.contains(numbers.get(i)) && !numbers.get(i).equals(tryNumbers.get(i))) {
                 updateResult(result, BALL);
